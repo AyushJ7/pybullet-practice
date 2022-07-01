@@ -1,0 +1,42 @@
+<robot name="dabba">
+    
+<material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+<link name="base">
+        <inertial>
+         <origin xyz ="0 0 0" rpy="0 0 0"/>
+         <mass value="10000"/>
+         <inertia
+           ixx="1.2"
+           iyy="5.5"
+           izz="6.0"
+           ixy="0.0"
+           ixz="-0.2"
+           iyz="-0.01" />
+        </inertial>
+
+        <visual>
+          <origin xyz ="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="5 4.165 1.18"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0.3 0.3 0.3 1.0"/>
+        </material>
+      </visual>  
+      <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="5 4.165 1.18"/>
+            </geometry>
+      </collision> 
+   </link>
+</robot>

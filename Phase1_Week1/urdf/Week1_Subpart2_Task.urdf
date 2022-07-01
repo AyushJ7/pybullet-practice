@@ -1,0 +1,153 @@
+<robot name="2_R_robot">
+
+<material name="blue">
+    <color rgba="0 0 0.8 1"/>
+</material>
+
+<material name="black">
+   <color rgba="0 0 0 1"/>
+</material>
+   
+<material name="yellow">
+   <color rgba="1 1 0 1"/>
+</material> 
+
+   <link name="fixed_base">
+      <visual>
+         <geometry>
+            <box size="0.4 0.8 0.075"/>
+         </geometry>
+         <material name="black"/>   
+         <origin rpy="0 0 0" xyz="0 0 0"/>
+	   </visual>
+      <collision>
+         <geometry>
+            <box size="0.4 0.8 0.075"/>
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="1"/>
+         <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/> 
+         <origin rpy="0 0 0" xyz="0 0 0"/>
+      </inertial>
+   </link>
+
+   <link name="fixed_cyl"> 
+      <visual>
+         <geometry>
+            <cylinder length="0.25" radius="0.07"/>
+         </geometry>
+         <origin xyz="0 0 0" rpy="0 1.57 0"/>
+         <material name="yellow"/>
+      </visual>
+      <collision>
+         <geometry>
+            <cylinder length="0.25" radius="0.07"/>
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="1"/>
+         <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+   </link>
+
+   <joint name="base" type="fixed">
+      <axis xyz="1 0 0"/>
+      <limit effort="10" lower="-0.4" upper="0.8" velocity="0.05"/>
+      <parent link="fixed_base"/>
+      <child link="fixed_cyl"/>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+   </joint>
+
+   <link name="link_1">
+      <visual>
+         <geometry>
+            <cylinder length="1" radius="0.035"/>
+         </geometry>
+         <origin xyz="0 0.37 0.37" rpy="-0.785 0 0"/>
+         <material name="blue"/>
+      </visual>
+      <collision>
+         <geometry>
+            <cylinder length="1" radius="0.035"/>
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="2"/>
+         <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+      <visual>
+         <geometry>
+            <cylinder length="0.05" radius="0.08"/>
+         </geometry>
+		   <origin xyz="0 0.73 0.73" rpy="0 1.57 0"/>
+      </visual>
+      <collision>
+         <geometry>
+            <cylinder length="0.05" radius="0.08"/>
+         </geometry>
+      </collision>
+   </link>
+
+
+   <link name="link_2">
+      <visual>
+         <geometry>
+            <cylinder length="1" radius="0.035"/>
+         </geometry>
+         <origin xyz="0 0.5 0.145" rpy="1.832 0 0"/>
+         <material name="yellow"/>
+      </visual>
+      <collision>
+         <geometry>
+            <cylinder length="1" radius="0.035"/>
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="2"/>
+         <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+   </link>
+ 
+   <link name="hand">
+      <visual>
+         <geometry>
+            <box size="0.3 0.3 0.3"/>
+         </geometry>
+         <origin xyz="0 0.15 0.025" rpy="0.85 0 0"/>   
+	   </visual>
+      <collision>
+         <geometry>
+            <box size="0.3 0.3 0.3"/>
+         </geometry>
+      </collision>
+      <inertial>
+         <mass value="0.25"/>
+         <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+   </link>
+
+   <joint name="Revolute_joint_1" type="revolute">
+      <axis xyz="1 0 0"/>
+      <limit effort="100" lower="-0.4" upper="0.8" velocity="0.05"/>
+      <parent link="fixed_cyl"/>
+      <child link="link_1"/>
+      <origin xyz="0 0 0"/>
+   </joint>
+
+   <joint name="Revolute_joint_2" type="revolute">
+      <axis xyz="1 0 0"/>
+      <limit effort="100" lower="-1.8" upper="0.5" velocity="0.05"/>
+      <parent link="link_1"/>
+      <child link="link_2"/>
+      <origin xyz="0 0.71 0.71"/>
+   </joint>
+
+   <joint name="Revolute_joint_3" type="revolute">
+      <axis xyz="1 0 0"/>
+      <limit effort="10" lower="-0.4" upper="0.8" velocity="0.05"/>
+      <parent link="link_2"/>
+      <child link="hand"/>
+      <origin xyz="0 1 0.25"/>
+   </joint>
+</robot>
